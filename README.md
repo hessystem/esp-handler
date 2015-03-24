@@ -1,1 +1,0 @@
-this is library we develop with in order to help people who use esp8266 wifi module on their Arduino Project 
