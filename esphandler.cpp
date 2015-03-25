@@ -17,7 +17,7 @@ void esphandler::Checkcommand(String command);
 	}
 	else if(command.equals(String.toLowerCase("firmware")))
 	{
-		this.getResponse(this.firmwareVersion);
+		this.getResponse(this.firmwareVersion());
 	}
 	else
 	{
