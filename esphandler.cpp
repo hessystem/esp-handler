@@ -1,3 +1,5 @@
+//March, 27th : i added getresponse, firmware version and list of AP function. i think getresponse function is not yet completed
+//
 #include "esphandler.h";
 #include "Arduino.h";
 
@@ -14,19 +16,19 @@ void esphandler::Checkcommand(String command);
 	}
 	else if(command.equals("restart"))
 	{
-		//this.getResponse("Restart done");
+		Serial.println(this.getResponse("AT+RST"));
 	}
 	else if(command.equals("firmware"))
 	{
-		//this.getResponse(this.firmwareVersion());
+		Serial.println(this.getResponse(this.firmwareVersion));
 	}
 	else if(command.equals("list_ap"))
 	{
-		this.getResponse
+		Serial.println(this.getResponse(this.listAP()));
 	}
-	else
+	else if(command.equals("join_ap"))
 	{
-	
+		
 	}
 }
 String esphandler::getResponse(String resp)
@@ -39,5 +41,23 @@ String esphandler::getResponse(String resp)
 		response = response+l;
 	}
 	return response;
+}
+String esphandler::firmwareVersion(void)
+{
+	return "AT+GMR";
+}
+String esphandler::listAP();
+{
+	return "AT+CWLAP";
+}
+String esphandler::joinAP(String ssid, String password)
+{
+	String join=String.concat("AT+CWJAP=<",ssid);
+	join=String.concat(join,">");
+	join=String.concat(join,",");
+	join=String.concat(join,"<");
+	join=String.concat(join,"password");
+	join=String.concat(join,">");
+	return join;
 }
 
