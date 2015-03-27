@@ -6,6 +6,7 @@
 
 #include "Arduino.h";
 #include "SoftwareSerial.h"
+#define this->p this.p
 class esphandler
 {
 public:
