@@ -3,9 +3,10 @@
 #include "esphandler.h";
 #include "Arduino.h";
 
-esphandler::esphandler(int RX,int TX)
+esphandler::esphandler(int RX,int TX,int rate)
 {
-	this.wifimodule(RX,TX);
+	//this.wifimodule(RX,TX) = new ;
+	this.wifimodule.begin(rate);
 }
 void esphandler::Checkcommand(String command);
 {
