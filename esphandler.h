@@ -6,6 +6,7 @@
 //March 27th
 //some abstract function finally implemented
 //setparam ap is not completed yet
+//April,4th i add getconnectstatusmethod. this method is used to get information about connection status
 #ifndef esphandler_h
 #define esphandler_h
 #include "Arduino.h";
@@ -14,7 +15,6 @@
 class esphandler
 {
 public:
-	SoftwareSerial wifimodule(0,0);
 	esphandler(int RX,int TX);
 	~esphandler(int RX,int TX);
 	void checkCommand(String command);
@@ -25,7 +25,11 @@ public:
 	String joinAP(String ssid, String password);
 	String QuitAP();
 	String getIP();
-	String setparamAP(); // i dont know what is this ???
-	String wifiMode(int mode);
-	String startClientTCP(String chan, String host, String port);	
+	String setparamAP(String); // i dont know what is this ???
+	String checkjoindevices();
+	String wifiMode(char mode);
+	String startClientTCP(String chan, String host, String port);
+	String getconnectStatus();
+private:
+	SoftwareSerial wifimodule(0,0);
 };
