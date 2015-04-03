@@ -1,11 +1,12 @@
 //March, 27th : i added getresponse, firmware version and list of AP function. i think getresponse function is not yet completed
-//
+//April, 3rd : finally, the problem about  how to change RX and TX value on wifimodule attribute is solved
 #include "esphandler.h";
 #include "Arduino.h";
 
 esphandler::esphandler(int RX,int TX,int rate)
 {
-	//this.wifimodule(RX,TX) = new ;
+	SoftwareSerial temp(RX,TX);
+	this.wifimodule = temp ;
 	this.wifimodule.begin(rate);
 }
 void esphandler::Checkcommand(String command);
