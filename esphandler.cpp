@@ -1,5 +1,6 @@
 //March, 27th : i added getresponse, firmware version and list of AP function. i think getresponse function is not yet completed
 //April, 3rd : finally, the problem about  how to change RX and TX value on wifimodule attribute is solved
+//April, 6th : i added 3 more method : getconnectStatus, setTotalConnection and checkMultipleConnection
 #include "esphandler.h";
 #include "Arduino.h";
 
@@ -22,7 +23,7 @@ void esphandler::Checkcommand(String command);
 	}
 	else if(command.equals("firmware"))
 	{
-		Serial.println(this.getResponse(this.firmwareVersion));
+		Serial.println(this.getResponse(this.firmwareVersion()));
 	}
 	else if(command.equals("list_ap"))
 	{
@@ -31,6 +32,28 @@ void esphandler::Checkcommand(String command);
 	else if(command.equals("join_ap"))
 	{
 		
+	}
+	else if(command.equals("multicon?"))
+	{
+		Serial.println(this.getResponse(this.listAP()));	
+	}
+	else if(command.equals("setcon"))
+	{
+		Serial.print("\nset mode:");
+		char t = Serial.read();
+		if((t=='0')||(t=='1'))
+		{
+			Serial.println("");
+			Serial.println(this.getResponse(this.setTotalConnection(t)));		
+		}
+		else
+		{
+			Serial.print("\nonly available with mode 0 or 1 ");
+		}
+	}
+	else if(command.equals("con_stat"))
+	{
+		Serial.println(this.getResponse(this.getconnectStatus()));
 	}
 }
 String esphandler::getResponse(String resp)
@@ -62,4 +85,22 @@ String esphandler::joinAP(String ssid, String password)
 	join=String.concat(join,">");
 	return join;
 }
-
+String esphandler::startClientTCP(String chan, String host, String port)
+{
+	String join=String.concat("AT+CIPSTART=<",)
+}
+String esphandler::checkMultiplecon(void)
+{
+	return "AT+CIPMUX?";
+}
+String esphandler::setTotalConnection(char num)
+{
+	String mod(num);
+	String join=String.concat("AT+CIPMUX=<",mod);
+	join=String.concat(join,">");
+	return join;
+}
+String esphandler::getconnectStatus(void)
+{
+	return "AT+CIPSTATUS";
+}
