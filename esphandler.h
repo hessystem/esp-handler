@@ -18,18 +18,20 @@ public:
 	esphandler(int RX,int TX);
 	~esphandler(int RX,int TX);
 	void checkCommand(String command);
+private:
+	SoftwareSerial wifimodule(0,0);
 	String sendATCommand(String command, String response);
 	String getResponse(String resp);
-	String firmwareVersion();
+	String firmwareVersion(void);
 	String listAP();
 	String joinAP(String ssid, String password);
 	String QuitAP();
 	String getIP();
 	String setparamAP(String); // i dont know what is this ???
-	String checkjoindevices();
+	String checkjoindevices(void);
 	String wifiMode(char mode);
 	String startClientTCP(String chan, String host, String port);
-	String getconnectStatus();
-private:
-	SoftwareSerial wifimodule(0,0);
+	String getconnectStatus(void);
+	String checkMultiplecon();
+	String setTotalConnection(char num);
 };
