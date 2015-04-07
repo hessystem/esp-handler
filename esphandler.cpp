@@ -58,9 +58,30 @@ void esphandler::Checkcommand(String command);
 	}
 	else if(command.equals("quit_ap"))
 	{
+		Serial.println(this.getResponse(this.QuitAP('1')));
+	}
+	else if(command.equals("connectap?"))
+	{
+		Serial.println(this.getResponse(this.QuitAP('0')));
+	}
+	else if(command.equals("wifimode?"))
+	{
+		Serial.println(this.getResponse(this.wifiMode('0')));
+	}
+	else if(command.equals("setwifimode"))
+	{
+		char mode = Serial.read();
+		if((mode=='1')||(mode=='2')||(mode=='3'))
+		{
+			Serial.println(this.getResponse(this.wifiMode(mode)));
+		}
+		else
+		{
+			Serial.println("\nthis module will work with mode 1,2 or 3");
+		}
 		
 	}
-	else
+	else if(command.equals("setserver"))
 	{
 		
 	}
@@ -86,17 +107,12 @@ String esphandler::listAP(void);
 }
 String esphandler::joinAP(String ssid, String password)
 {
-	String join=String.concat("AT+CWJAP=\"",ssid);
-	join=String.concat(join,"\"");
-	join=String.concat(join,",");
-	join=String.concat(join,"\"");
-	join=String.concat(join,password);
-	join=String.concat(join,"\"");
-	return String.concat(join,"\n");
+	return "AT+CWJAP=\""+ssid+"\""+","+"\""+password+"\""+"\n";
 }
 String esphandler::startClientTCP(String chan, String host, String port)
 {
-	String join=String.concat("AT+CIPSTART=<",)
+	//String join=String.concat("AT+CIPSTART=<",)
+	return "";
 }
 String esphandler::checkMultiplecon(void)
 {
@@ -104,9 +120,7 @@ String esphandler::checkMultiplecon(void)
 }
 String esphandler::setTotalConnection(char num)
 {
-	String mod(num);
-	String join=String.concat("AT+CIPMUX=",mod);
-	return join;
+	return "AT+CIPMUX="+num;
 }
 String esphandler::getconnectStatus(void)
 {
@@ -122,10 +136,7 @@ String esphandler::getIP(void)
 }
 String esphandler::setServer(String mode,String port);
 {
-	String join = "AT+CIPSERVER=";
-	join = String.concat(join,mode);
-	join = String.concat(String.concat(join,","),port);
-	return String.concat(join,"\n");
+	return "AT+CIPSERVER="+mode+","+port
 }
 String esphandler::QuitAP(char num)
 {
@@ -142,11 +153,10 @@ String esphandler::wifiMode(char mode)
 {
 	if(mode=='0')
 	{
-		return"AT+CWMODE?"
+		return"AT+CWMODE?";
 	}
 	else
 	{
-		String p = String(mode)
-		return String.concat("AT+CWMODE=",p);
+		return "AT+CWMODE="mode);
 	}
 }
