@@ -7,6 +7,7 @@
 //some abstract function finally implemented
 //setparam ap is not completed yet
 //April,4th i add getconnectstatusmethod. this method is used to get information about connection status
+//April,7th i add some method
 #ifndef esphandler_h
 #define esphandler_h
 #include "Arduino.h";
@@ -23,15 +24,16 @@ private:
 	String sendATCommand(String command, String response);
 	String getResponse(String resp);
 	String firmwareVersion(void);
-	String listAP();
+	String listAP(void);
 	String joinAP(String ssid, String password);
-	String QuitAP();
-	String getIP();
+	String QuitAP(char num);
+	String getIP(void);
 	String setparamAP(String); // i dont know what is this ???
 	String checkjoindevices(void);
 	String wifiMode(char mode);
 	String startClientTCP(String chan, String host, String port);
 	String getconnectStatus(void);
-	String checkMultiplecon();
+	String checkMultiplecon(void);
 	String setTotalConnection(char num);
+	String setServer(String mode,String port);
 };
