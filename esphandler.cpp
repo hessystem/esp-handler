@@ -1,6 +1,7 @@
 //March, 27th : i added getresponse, firmware version and list of AP function. i think getresponse function is not yet completed
 //April, 3rd : finally, the problem about  how to change RX and TX value on wifimodule attribute is solved
 //April, 6th : i added 3 more method : getconnectStatus, setTotalConnection and checkMultipleConnection
+//April, 7th : i implemented some method that have not implemented yet (you dont say) 
 #include "esphandler.h";
 #include "Arduino.h";
 
@@ -55,6 +56,14 @@ void esphandler::Checkcommand(String command);
 	{
 		Serial.println(this.getResponse(this.getconnectStatus()));
 	}
+	else if(command.equals("quit_ap"))
+	{
+		
+	}
+	else
+	{
+		
+	}
 }
 String esphandler::getResponse(String resp)
 {
@@ -69,21 +78,21 @@ String esphandler::getResponse(String resp)
 }
 String esphandler::firmwareVersion(void)
 {
-	return "AT+GMR";
+	return "AT+GMR\n";
 }
-String esphandler::listAP();
+String esphandler::listAP(void);
 {
-	return "AT+CWLAP";
+	return "AT+CWLAP\n";
 }
 String esphandler::joinAP(String ssid, String password)
 {
-	String join=String.concat("AT+CWJAP=<",ssid);
-	join=String.concat(join,">");
+	String join=String.concat("AT+CWJAP=\"",ssid);
+	join=String.concat(join,"\"");
 	join=String.concat(join,",");
-	join=String.concat(join,"<");
-	join=String.concat(join,"password");
-	join=String.concat(join,">");
-	return join;
+	join=String.concat(join,"\"");
+	join=String.concat(join,password);
+	join=String.concat(join,"\"");
+	return String.concat(join,"\n");
 }
 String esphandler::startClientTCP(String chan, String host, String port)
 {
@@ -91,16 +100,53 @@ String esphandler::startClientTCP(String chan, String host, String port)
 }
 String esphandler::checkMultiplecon(void)
 {
-	return "AT+CIPMUX?";
+	return "AT+CIPMUX?\n";
 }
 String esphandler::setTotalConnection(char num)
 {
 	String mod(num);
-	String join=String.concat("AT+CIPMUX=<",mod);
-	join=String.concat(join,">");
+	String join=String.concat("AT+CIPMUX=",mod);
 	return join;
 }
 String esphandler::getconnectStatus(void)
 {
-	return "AT+CIPSTATUS";
+	return "AT+CIPSTATUS\n";
+}
+String esphandler::QuitAP(void)
+{
+	return "AT+CWQAP\n";
+}
+String esphandler::getIP(void)
+{
+	return "AT+CIFSR\n";
+}
+String esphandler::setServer(String mode,String port);
+{
+	String join = "AT+CIPSERVER=";
+	join = String.concat(join,mode);
+	join = String.concat(String.concat(join,","),port);
+	return String.concat(join,"\n");
+}
+String esphandler::QuitAP(char num)
+{
+	if(num=='1')
+	{
+		return"AT+CWQAP?";
+	}
+	else
+	{
+		return"AT+CWQAP";
+	}
+}
+String esphandler::wifiMode(char mode)
+{
+	if(mode=='0')
+	{
+		return"AT+CWMODE?"
+	}
+	else
+	{
+		String p = String(mode)
+		return String.concat("AT+CWMODE=",p);
+	}
 }
