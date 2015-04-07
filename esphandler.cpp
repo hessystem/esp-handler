@@ -107,7 +107,7 @@ String esphandler::listAP(void);
 }
 String esphandler::joinAP(String ssid, String password)
 {
-	return "AT+CWJAP=\""+ssid+"\""+","+"\""+password+"\""+"\n";
+	return "AT+CWJAP=\"" + ssid + "\"" + "," + "\"" + password + "\"" + "\n";
 }
 String esphandler::startClientTCP(String chan, String host, String port)
 {
@@ -136,7 +136,7 @@ String esphandler::getIP(void)
 }
 String esphandler::setServer(String mode,String port);
 {
-	return "AT+CIPSERVER="+mode+","+port
+	return "AT+CIPSERVER=" + mode + "," + port;
 }
 String esphandler::QuitAP(char num)
 {
