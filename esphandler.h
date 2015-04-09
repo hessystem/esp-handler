@@ -28,7 +28,6 @@ private:
 	String joinAP(String ssid, String password);
 	String QuitAP(char num);
 	String getIP(void);
-	String setparamAP(String); // i dont know what is this ???
 	String checkjoindevices(void);
 	String wifiMode(char mode);
 	String startClientTCP(String chan, String host, String port);
@@ -36,4 +35,5 @@ private:
 	String checkMultiplecon(void);
 	String setTotalConnection(char num);
 	String setServer(String mode,String port);
+	String sendData();
 };
