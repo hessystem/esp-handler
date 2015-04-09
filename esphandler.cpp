@@ -32,11 +32,12 @@ void esphandler::Checkcommand(String command);
 	}
 	else if(command.equals("join_ap"))
 	{
-		
+		char ssid[40] = Serial.read();
+		char password[20] = Serial.read();
 	}
 	else if(command.equals("multicon?"))
 	{
-		Serial.println(this.getResponse(this.listAP()));	
+		Serial.println(this.getResponse(this.checkMultipleCon()));	
 	}
 	else if(command.equals("setcon"))
 	{
@@ -83,7 +84,10 @@ void esphandler::Checkcommand(String command);
 	}
 	else if(command.equals("setserver"))
 	{
-		
+		char mode2 = Serial.readln();
+		char port2[5] = Serial.readln();
+		String mod(mode2);
+		String 
 	}
 }
 String esphandler::getResponse(String resp)
@@ -111,8 +115,7 @@ String esphandler::joinAP(String ssid, String password)
 }
 String esphandler::startClientTCP(String chan, String host, String port)
 {
-	//String join=String.concat("AT+CIPSTART=<",)
-	return "";
+	return "AT+CIPSTART="+chan+",\"TCP\",\""+host+"\","+port;
 }
 String esphandler::checkMultiplecon(void)
 {
@@ -159,4 +162,8 @@ String esphandler::wifiMode(char mode)
 	{
 		return "AT+CWMODE="mode);
 	}
+}
+String esphandler::sendData()
+{
+	
 }
